@@ -17,7 +17,7 @@ const typeDefs = gql`
         getUsers:[User]
     }
     type Mutation{
-        newUser(input:UserInput): User
+        createUser(input:UserInput): User
     }
 `;
 

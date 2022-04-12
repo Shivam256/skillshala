@@ -1,36 +1,16 @@
 const User = require("./models/user.model.js");
 
+import { getUsers, getUser } from "./queries/user.queries";
+import {createUser} from './mutations/user.mutations';
+
 const resolvers = {
   Query: {
-    getUsers: async () => {
-      try {
-        const users = await User.find({});
-        return users;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    getUser: async (_, { id }) => {
-      const user = User.findById(id);
-      if (!user) {
-        throw new Error("User not found!");
-      }
-      return user;
-    },
+    getUsers,
+    getUser,
   },
   Mutation: {
-    newUser: async (_, { input }) => {
-      try {
-        const user = new User(input);
-        await user.save();
-
-        return user;
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    createUser
   },
 };
-
 
 export default resolvers;

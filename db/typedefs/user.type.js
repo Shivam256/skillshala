@@ -1,6 +1,6 @@
 import {gql} from 'apollo-server-micro';
 
-const typeDefs = gql`
+const userTypes = gql`
     type User{
         id:ID
         name:String
@@ -22,4 +22,4 @@ const typeDefs = gql`
 `;
 
 
-export default typeDefs;
+export default userTypes;

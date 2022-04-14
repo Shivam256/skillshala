@@ -1,11 +1,71 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-
+import { useState } from "react";
 import client from "../apollo_client";
 import { gql } from "@apollo/client";
+import Lottie from "react-lottie";
+import landingPageLottie from "../assets/lotties/landingPage.json";
+import { Button, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-export default function Home() {
+import { SignUp, Login } from "../components/auth";
+
+const signUpSchema = yup.object({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email().required("Email is required"),
+  password: yup.string().required("Password is required"),
+  cpassowrd: yup
+    .string()
+    .required()
+    .oneOf([yup.ref("password"), null], "Passwords do not match"),
+});
+
+const loginSchema = yup.object({
+  email: yup.string().email().required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
+
+const LandinPageIntro = ({setMode}) => (
+  <div className="w-full h-full flex flex-col justify-center ">
+    <h1 className="text-8xl">
+      Welcome to <span className="font-bold text-blue-500">skillshala</span>
+    </h1>
+    <h2 className="text-3xl ">A place for learneres and educators</h2>
+    <Button
+      className="w-fit py-2 px-10 bg-blue-500 hover:bg-blue-500 font-bold text-xl mt-10 text-white hover:text-white"
+      onClick={() => {
+        setMode("signup");
+      }}
+    >
+      JOIN THE COMMUNITY
+    </Button>
+  </div>
+);
+
+export default function Home({ data, loading }) {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: landingPageLottie,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+  const [mode, setMode] = useState("landing");
+
+  let elem = <LandinPageIntro setMode={setMode} />;
+
+  if (mode == "signup") {
+    elem = <SignUp setMode={setMode} />;
+  }
+
+  if (mode == "login") {
+    elem = <Login setMode={setMode}/>;
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,15 +74,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-        <h1>hello</h1>
+      <div className="w-full h-screen grid grid-cols-2">
+        <div className="h-full flex flex-col justify-center">
+          <Lottie options={defaultOptions} height="80%" width="100%" />
+        </div>
+        <div className="w-full h-full px-5">
+          {elem}
+        </div>
       </div>
     </div>
   );
 }
 
 export const getStaticProps = async () => {
-  const {data,loading} = await client.query({
+  const { data, loading } = await client.query({
     query: gql`
       query Query {
         getUsers {
@@ -32,11 +97,12 @@ export const getStaticProps = async () => {
       }
     `,
   });
-  console.log(data);
+  console.log(data.getUsers);
 
   return {
-    props:{
-      data
-    }
-  }
+    props: {
+      data: data.getUsers,
+      loading,
+    },
+  };
 };

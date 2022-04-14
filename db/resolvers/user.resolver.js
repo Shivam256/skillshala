@@ -1,9 +1,7 @@
-const User = require("./models/user.model.js");
-
 import { getUsers, getUser } from "./queries/user.queries";
 import {createUser} from './mutations/user.mutations';
 
-const resolvers = {
+const userResolvers = {
   Query: {
     getUsers,
     getUser,
@@ -13,4 +11,4 @@ const resolvers = {
   },
 };
 
-export default resolvers;
+export default userResolvers;

@@ -4,6 +4,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { signUpSchema } from "../../validations";
+import { Fade } from "react-reveal";
+
+import CustomInput from "../customInput/customInput.component";
+import { useMutation } from "@apollo/client";
+
+import { SignInMutation } from "../../graphql/mutations";
 
 const SignUp = ({ setMode }) => {
   const {
@@ -14,63 +20,79 @@ const SignUp = ({ setMode }) => {
     resolver: yupResolver(signUpSchema),
   });
 
+  const [signin, { data, loading, error }] = useMutation(SignInMutation);
+
+  const onSubmit = async (data) => {
+    const res = await signin({
+      variables: { input: { email: data.email, name: data.name, password: data.password } },
+    });
+    console.log(res);
+  };
+
   return (
     <div className="w-full h-full flex flex-col justify-center space-y-4 ">
-      <h1 className="text-6xl mb-5">Sign Up</h1>
+      <Fade>
+        <h1 className="text-6xl mb-5">Sign Up</h1>
+      </Fade>
       <form
-        onSubmit={handleSubmit((d) => {
-          console.log(d);
-        })}
-        className='flex flex-col space-y-2'
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col space-y-2"
       >
-        <input
-          type="text"
-          className="w-3/4  border rounded-sm h-14 border-black px-3"
+        <CustomInput
+          register={register}
+          errors={errors}
           placeholder="Name"
-          {...register("name")}
-        />
-        <p className="text-xs text-red-500">{errors.name?.message}</p>
-        <input
           type="text"
-          className="w-3/4  border rounded-sm h-14 border-black px-3"
+          name="name"
+        />
+        <CustomInput
+          register={register}
+          errors={errors}
           placeholder="Email"
-          {...register("email")}
-        />
-          <p className="text-xs text-red-500">{errors.email?.message}</p>
-        <input
           type="text"
-          className="w-3/4  border rounded-sm h-14 border-black px-3"
+          name="email"
+        />{" "}
+        <CustomInput
+          register={register}
+          errors={errors}
           placeholder="Password"
-          {...register("password")}
-        />
-          <p className="text-xs text-red-500">{errors.password?.message}</p>
-        <input
           type="text"
-          className="w-3/4  border rounded-sm h-14 border-black px-3"
+          name="password"
+        />{" "}
+        <CustomInput
+          register={register}
+          errors={errors}
           placeholder="Confirm Password"
-          {...register("cpassword")}
+          type="text"
+          name="cpassword"
         />
-          <p className="text-xs text-red-500">{errors.cpassword?.message}</p>
-        <Button
-          className="w-fit py-2 px-10 bg-blue-500 hover:bg-blue-500 font-bold text-xl text-white hover:text-white"
-          type="submit"
-        >
-          SIGN UP
-        </Button>
+        <Fade delay={1000} bottom>
+          <Button
+            className="w-fit py-2 px-10 bg-blue-500 hover:bg-blue-500 font-bold text-xl text-white hover:text-white"
+            type="submit"
+          >
+            SIGN UP
+          </Button>
+        </Fade>
       </form>
-      <h3 className="text-sm">
-        Aleady have an account?{" "}
-        <button
-          className="text-blue-500"
-          onClick={() => {
-            setMode("login");
-          }}
-        >
-          Login
-        </button>
-      </h3>
+
+      <Fade delay={1200} bottom>
+        <h3 className="text-sm">
+          Aleady have an account?{" "}
+          <button
+            className="text-blue-500"
+            onClick={() => {
+              setMode("login");
+            }}
+          >
+            Login
+          </button>
+        </h3>
+      </Fade>
     </div>
   );
 };
 
 export default SignUp;
+
+export const getStaticProps = async () => {};

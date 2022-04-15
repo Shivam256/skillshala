@@ -13,10 +13,10 @@ const MainLayout = ({ children }) => {
       {router.pathname !== "/" ? (
         <>
           <Header />
-          <main style={{ marginTop: "60px" }}>{children}</main>
+          <div style={{ marginTop: "60px", width:'100vw',height:'calc(100vh - 60px)',overflowY:'scroll' }}>{children}</div>
         </>
       ) : (
-        <main>{children}</main>
+        <main >{children}</main>
       )}
     </div>
   );

@@ -29,7 +29,7 @@ const ProfileDropdown = ({ state, toggleDropdown }) => {
       <DropdownLink link="/courses/ll" name="My Courses" />
       <DropdownLink link="/courses/ll" name="My Cart" />
       <DropdownLink link="/courses/ll" name="Wishlist" />
-      <DropdownLink link="/courses/ll" name="Become an instructor" />
+      <DropdownLink link="/instructor/apply" name="Become an instructor" />
       <DropdownLink link="/courses/ll" name="Settings" />
       <DropdownLink link="/courses/ll" name="Logout" />
     </div>

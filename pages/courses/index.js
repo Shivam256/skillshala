@@ -5,7 +5,7 @@ import CourseOverview from "../../components/courseOverview/courseOverview.compo
 
 const Courses = () => {
   return (
-    <div className="max-w-7xl flex-col mx-auto px-5 md:px-3 lg:px-2 py-5">
+    <div className="max-w-7xl flex-col mx-auto px-5 md:px-3 lg:px-2 py-5 ">
       <h1 className="text-3xl mb-2">Continue learning</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 w-full gap-5 ">
         <PurchasedCourseOverview />

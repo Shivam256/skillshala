@@ -12,7 +12,7 @@ const Header = () => {
     <div className="w-screen h-16 flex items-cente justify-between px-5 md:px-10 lg:px-12 shadow-md fixed bg-white z-50 top-0">
       <div className="flex items-center w-3/4 ">
         <BiMenu color="black" size={25} className="block md:hidden mr-3" />
-      <h3 className="mr-10 text-lg md:text-xl lg:text-2xl ">academia</h3>
+      <h3 className="mr-10 text-lg md:text-xl lg:text-2xl ">skillshala</h3>
         <input
           type="text"
           className="w-2/4 rounded-sm h-8 border border-gray-400 px-2"

@@ -4,15 +4,18 @@ import { BiMenu } from "react-icons/bi";
 import { BsHeart, BsCart, BsBell, BsPersonCircle } from "react-icons/bs";
 import ProfileDropdown from "./headerDropdowns";
 
+import Link from 'next/link';
 const Header = () => {
   const [dropdownStates, setDropdownStates] = useState({
     profileDropdown: false,
   });
   return (
-    <div className="w-screen h-16 flex items-cente justify-between px-5 md:px-10 lg:px-12 shadow-md fixed bg-white z-50 top-0">
+    <div className="w-screen h-16 flex items-center justify-between px-5 md:px-10 lg:px-12 shadow-md fixed bg-white z-50 top-0">
       <div className="flex items-center w-3/4 ">
         <BiMenu color="black" size={25} className="block md:hidden mr-3" />
-      <h3 className="mr-10 text-lg md:text-xl lg:text-2xl ">skillshala</h3>
+        <Link href="/">
+          <h3 className="mr-10 text-lg md:text-xl lg:text-2xl cursor-pointer ">skillshala</h3>
+        </Link>
         <input
           type="text"
           className="w-2/4 rounded-sm h-8 border border-gray-400 px-2"
@@ -30,7 +33,12 @@ const Header = () => {
             setDropdownStates({ ...dropdownStates, profileDropdown: true });
           }}
         />
-        <ProfileDropdown state={dropdownStates.profileDropdown} toggleDropdown={()=>{setDropdownStates({...dropdownStates,profileDropdown:false})}} />
+        <ProfileDropdown
+          state={dropdownStates.profileDropdown}
+          toggleDropdown={() => {
+            setDropdownStates({ ...dropdownStates, profileDropdown: false });
+          }}
+        />
       </div>
     </div>
   );

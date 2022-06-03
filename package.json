@@ -12,6 +12,7 @@
     "@apollo/client": "^3.5.10",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@faker-js/faker": "^6.2.0",
     "@graphql-tools/merge": "^8.2.7",
     "@graphql-tools/schema": "^8.3.7",
     "@hookform/resolvers": "^2.8.8",
@@ -23,6 +24,7 @@
     "bcrypt": "^5.0.1",
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
+    "loadash": "^1.0.0",
     "micro": "^9.3.4",
     "mongodb": "^4.5.0",
     "mongoose": "^6.2.10",
@@ -39,9 +41,11 @@
     "react-player": "^2.10.0",
     "react-rating": "^2.0.5",
     "react-reveal": "^1.2.2",
+    "react-slick": "^0.29.0",
     "react-step-progress": "^1.0.3",
     "react-step-progress-bar": "^1.0.3",
     "recoil": "^0.7.0",
+    "slick-carousel": "^1.8.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {
